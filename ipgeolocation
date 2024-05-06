@@ -1,0 +1,15 @@
+#!/bin/bash
+# IP Geolocation Test Script
+
+# Define the target IP address
+target_ip="8.8.8.8"
+
+# Perform the IP geolocation test
+curl -s https://ipinfo.io/$target_ip
+
+# Check the exit code of the curl command
+if [ $? -eq 0 ]; then
+    echo "IP geolocation test successful. The location of the IP address was determined."
+else
+    echo "IP geolocation test failed. The location of the IP address could not be determined."
+fi

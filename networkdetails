@@ -1,0 +1,26 @@
+#!/bin/bash
+# Network Information Script
+
+# Retrieve IP address
+ip_address=$(ip -o -4 addr show | awk '/inet/ {print $4}')
+echo "IP Address: $ip_address"
+
+# Retrieve hostname
+hostname=$(hostname)
+echo "Hostname: $hostname"
+
+# Retrieve subnet mask
+subnet_mask=$(ip -o -4 addr show | awk '/inet/ {print $2}')
+echo "Subnet Mask: $subnet_mask"
+
+# Retrieve gateway
+gateway=$(ip route | awk '/default/ {print $3}')
+echo "Gateway: $gateway"
+
+# Retrieve DNS servers
+dns_servers=$(cat /etc/resolv.conf | awk '/nameserver/ {print $2}')
+echo "DNS Servers: $dns_servers"
+
+# Retrieve NTP server
+ntp_server=$(grep -i "^server" /etc/ntp.conf | awk '{print $2}')
+echo "NTP Server: $ntp_server"

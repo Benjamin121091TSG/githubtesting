@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# IP address or hostname
+target_ip="example.com"
+
+# Function to find the gateway for an IP
+find_gateway() {
+  local ip=$1
+  local gateway=""
+
+  # Extract the gateway IP from the default route
+  gateway=$(ip route | awk '/default/ { print $3 }')
+
+  # Print the gateway IP
+  echo "Gateway for $ip: $gateway"
+}
+
+# Perform a 3-second ping
+echo "Pinging $target_ip..."
+ping -c 3 -W 3 $target_ip
+echo
+
+# Perform a traceroute
+echo "Traceroute to $target_ip..."
+traceroute $target_ip
+echo
+
+# Perform a DNS lookup
+echo "DNS lookup for $target_ip..."
+nslookup $target_ip
+echo
+
+# Find the gateway for the IP
+find_gateway $target_ip

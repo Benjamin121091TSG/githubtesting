@@ -1,0 +1,14 @@
+#!/bin/bash
+
+subnet="192.168.0"  # Change this to your desired subnet
+
+for host in {1..254}; do
+    ip_address="$subnet.$host"
+    ping -c 1 -W 3 "$ip_address" >/dev/null 2>&1
+    
+    if [ $? -eq 0 ]; then
+        echo "Ping to $ip_address: Success"
+    else
+        echo "Ping to $ip_address: Failure"
+    fi
+done

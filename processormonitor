@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Specify the processes to monitor
+processes=(
+  "nginx"
+  "mysql"
+  "apache2"
+  "mariadb"
+  "vsftpd"
+)
+
+# Check process status
+for process in "${processes[@]}"
+do
+  if pgrep -x "$process" > /dev/null; then
+    echo "$process is running."
+  else
+    echo "$process is not running."
+    # Add code here to send a notification if needed
+  fi
+done

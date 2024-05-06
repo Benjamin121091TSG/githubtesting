@@ -1,0 +1,8 @@
+#!/bin/bash
+# Bandwidth Test Script
+
+# Define the target server for bandwidth testing
+target_server="http://speedtest.ftp.otenet.gr/files/test10Mb.db"
+
+# Perform the bandwidth test
+wget --output-document=/dev/null $target_server 2>&1 | grep -o '[0-9.]\+ [KM]B/s'

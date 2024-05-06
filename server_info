@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Get server IP address
+ip_address=$(hostname -I)
+
+# Get server hostname
+hostname=$(hostname)
+
+# Get free space on root partition
+free_space=$(df -h / | awk '/\// {print $4}')
+
+# Get largest 3 directories on the filesystem
+largest_directories=$(du -h / | sort -rh | head -n 3)
+
+# Get remaining inode space
+inode_space=$(df -i / | awk '/\// {print $4}')
+
+# Get top 3 processes using the most memory
+top_memory_processes=$(ps aux --sort=-%mem | head -n 4)
+
+# Get top 3 processes using the most CPU
+top_cpu_processes=$(ps aux --sort=-%cpu | head -n 4)
+
+# Display the information
+echo "Server IP address: $ip_address"
+echo "Hostname: $hostname"
+echo "Free space on root partition: $free_space"
+echo "Largest directories on filesystem:"
+echo "$largest_directories"
+echo "Remaining inode space: $inode_space"
+echo "Top 3 processes using the most memory:"
+echo "$top_memory_processes"
+echo "Top 3 processes using the most CPU:"
+echo "$top_cpu_processes"

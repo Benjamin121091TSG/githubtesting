@@ -1,0 +1,16 @@
+#!/bin/bash
+# Email Server Connection Test Script
+
+# Define the target email server and port
+target_server="mail.example.com"
+target_port=25
+
+# Test the email server connection
+nc -zv $target_server $target_port
+
+# Check the exit code of the nc command
+if [ $? -eq 0 ]; then
+    echo "Email server connection test successful. The email server is accessible."
+else
+    echo "Email server connection test failed. The email server is not accessible."
+fi
